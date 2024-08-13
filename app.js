@@ -7,22 +7,27 @@ async function getData(){
             throw new Error("response status: ${response.status}");
         }
 
-        return json = await response.json();
+        json = await response.json();
+
+        const region = document.getElementById("input_region").value;
+        console.log(region);
+
+        const regionalData = json.data_rain.filter(data => data.region === region);
+        console.log(regionalData)
+
+        if (regionalData.length > 0) {
+            return regionalData;
+        } else {
+            throw new Error(`No data found for region: ${region}`);
+        }
+        
         
     } catch (error){
         console.error(error.message);
     }
 }
 
-function searchRegion(region){
-    data = getData();
-    console.log(data);
-}
-getData();
-
-
-const input = document.getElementById("input_region");
 const search_btn = document.getElementById("search");
 
-search_btn.addEventListener("click", searchRegion);
+search_btn.addEventListener("click", getData);
 
