@@ -12,8 +12,11 @@ async function getData(){
         const region = document.getElementById("input_region").value;
         console.log(region);
 
-        const regionalData = json.data_rain.filter(data => data.region === region);
-        console.log(regionalData)
+        const regionalData = json.data_water.filter(data => data.region === region);
+        console.log(regionalData);
+
+        //display
+        displayResult(regionalData);
 
         if (regionalData.length > 0) {
             return regionalData;
@@ -27,6 +30,21 @@ async function getData(){
     }
 }
 
+function displayResult(data){
+    const resultDiv = document.getElementById("resultDiv");
+    // console.log(resultDiv);
+    console.log(data);
+    resultDiv.innerHTML = "";
+
+    data.forEach(item => {
+        
+            for(const key in item){
+                if(item.hasOwnProperty(key))
+                console.log(`${key}: ${item[key]}`)
+            }
+
+    });
+}
 document.getElementById("search").addEventListener("click",() => {
     const region = document.getElementById("input_region").value.trim();
 
