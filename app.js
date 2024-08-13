@@ -27,7 +27,14 @@ async function getData(){
     }
 }
 
-const search_btn = document.getElementById("search");
+document.getElementById("search").addEventListener("click",() => {
+    const region = document.getElementById("input_region").value.trim();
 
-search_btn.addEventListener("click", getData);
+    if(region){
+        getData(region)
+    } else {
+        console.log("Please enter a region");
+    }
+});
+
 
